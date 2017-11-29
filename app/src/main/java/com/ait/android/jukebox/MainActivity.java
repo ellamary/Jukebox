@@ -31,15 +31,6 @@ public class MainActivity extends Activity implements
 
     private Player mPlayer;
 
-
-
-
-
-
-
-
-    //comment
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
