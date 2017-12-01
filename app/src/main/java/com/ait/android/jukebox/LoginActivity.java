@@ -87,7 +87,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     @OnClick(R.id.btnLogin)
     void loginClick() {
         if (!isFormValid()) {

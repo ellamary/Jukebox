@@ -48,18 +48,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Song song = songList.get(position);
-        //holder.tvAuthor.setText(song.getTitle());
-        //holder.tvBody.setText(song.getBody());
-        //holder.tvTitle.setText(song.getTitle());
 
-//        if (song.getImageURL() != null) {
-//            Glide.with(context).load(post.getImageURL()).into(holder.ivPostImg);
-//            holder.ivPostImg.setVisibility(View.VISIBLE);
-//        } else {
-//            holder.ivPostImg.setVisibility(View.GONE);
-//        }
+        holder.tvTitle.setText(song.getTitle());
+        holder.tvArtist.setText(song.getArtist());
+        holder.tvScore.setText(song.getScore());
 
-        holder.btnDelete.setOnClickListener(new View.OnClickListener() {
+        holder.btnVeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removePost(holder.getAdapterPosition());
@@ -101,20 +95,24 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView tvAuthor;
         public TextView tvTitle;
-        public TextView tvBody;
-        public Button btnDelete;
+        public TextView tvArtist;
+        public TextView tvScore;
+        public Button btnVeto;
+        public Button btnUp;
+        public Button btnDown;
         public ImageView ivPostImg;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tvAuthor = itemView.findViewById(R.id.tvAuthor);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            tvBody = itemView.findViewById(R.id.tvBody);
-            btnDelete = itemView.findViewById(R.id.btnDelete);
+            tvArtist = itemView.findViewById(R.id.tvArtist);
+            tvScore = itemView.findViewById(R.id.tvScore);
+            btnVeto = itemView.findViewById(R.id.btnVeto);
             ivPostImg = itemView.findViewById(R.id.ivPostImg);
+            btnUp = itemView.findViewById(R.id.btnUp);
+            btnDown = itemView.findViewById(R.id.btnDown);
         }
     }
 }

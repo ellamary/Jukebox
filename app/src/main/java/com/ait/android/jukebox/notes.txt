@@ -9,6 +9,7 @@ TODO:
 - set up firebase
 - login activity
 - queue activity
+- can someone do the pretty UI? I suck at UI. -karina
 
 Song row layout
     up button
