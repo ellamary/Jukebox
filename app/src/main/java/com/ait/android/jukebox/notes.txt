@@ -1,0 +1,38 @@
+TODO:
+- figure out spotify
+    - min: items in song object
+- create song class
+    - Song.java
+- set up recycler view
+    - SongAdapter.java
+- add song activity (stretch)
+- set up firebase
+- login activity
+- queue activity
+
+Song row layout
+    up button
+    down button
+    song title
+    artist
+    current score
+    album image
+    veto button
+
+Veto dialogue
+    require password
+
+Firebase
+    user authentication
+    storage for songs
+
+Song object
+    title
+    uri
+    artist
+    album (title and/or picture)
+    analytics information (genre, etc)
+    currentScore
+
+wrap the web API for search functionality (stretch goal)
+include floating action button for adding a song!
