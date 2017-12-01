@@ -22,8 +22,8 @@ import java.util.List;
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 
     private Context context;
-    private List<Song> songList;
-    private List<String> songKeys;
+    public List<Song> songList;
+    public List<String> songKeys;
     private String uId;
     private int lastPosition = -1;
 

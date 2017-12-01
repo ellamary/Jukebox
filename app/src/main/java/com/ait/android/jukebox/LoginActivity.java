@@ -83,8 +83,6 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         progressDialog.show();
-
-
     }
 
     @OnClick(R.id.btnLogin)
