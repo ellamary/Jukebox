@@ -9,10 +9,10 @@ public class Song {
 
     public Song() {}
 
-    public Song(String title, String artist, int score, String uri) {
+    public Song(String title, String artist, String uri) {
         this.title = title;
         this.artist = artist;
-        this.score = score;
+        this.score = 1;
         this.uri = uri;
     }
 

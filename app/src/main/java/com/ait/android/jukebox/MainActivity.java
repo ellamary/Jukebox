@@ -3,12 +3,16 @@ package com.ait.android.jukebox;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.ait.android.jukebox.adapter.SongAdapter;
 import com.ait.android.jukebox.data.Song;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -71,6 +75,7 @@ public class MainActivity extends Activity implements
         AuthenticationRequest request = builder.build();
 
         AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+
     }
 
     public void initPostListener() {
@@ -183,5 +188,21 @@ public class MainActivity extends Activity implements
     @Override
     public void onConnectionMessage(String message) {
         Log.d("MainActivity", "Received connection message: " + message);
+    }
+
+    private void uploadSong(String title, String artist, String uri) {
+        String key = FirebaseDatabase.getInstance().getReference().child("posts").push().getKey();
+        title = "title here";
+        artist = "artist here";
+        uri = "uri here";
+        Song newSong = new Song(title, artist, uri);
+
+        FirebaseDatabase.getInstance().getReference().child("posts").child(key).setValue(newSong).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                Toast.makeText(MainActivity.this, "Post created", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
     }
 }
