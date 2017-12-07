@@ -1,13 +1,11 @@
 package com.ait.android.jukebox;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.SearchView;
 
@@ -15,7 +13,7 @@ import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Track;
 
-public class MainActivity extends AppCompatActivity implements Search.View {
+public class SearchActivity extends AppCompatActivity implements Search.View {
 
     static final String EXTRA_TOKEN = "EXTRA_TOKEN";
     private static final String KEY_CURRENT_QUERY = "CURRENT_QUERY";
@@ -53,8 +51,6 @@ public class MainActivity extends AppCompatActivity implements Search.View {
 
         mActionListener = new SearchPresenter(this, this);
         mActionListener.init(token);
-
-        //Log.d("token", "my token"+token);
 
         // Setup search field
         final SearchView searchView = (SearchView) findViewById(R.id.search_view);
