@@ -1,13 +1,15 @@
-package com.ait.android.jukebox;
+package com.ait.android.jukebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.ait.android.jukebox.R;
 import com.google.common.base.Joiner;
 import com.squareup.picasso.Picasso;
 
@@ -29,12 +31,14 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         public final TextView title;
         public final TextView subtitle;
         public final ImageView image;
+        public final Button btnAdd;
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.entity_title);
             subtitle = (TextView) itemView.findViewById(R.id.entity_subtitle);
             image = (ImageView) itemView.findViewById(R.id.entity_image);
+            btnAdd = (Button) itemView.findViewById(R.id.btn_add);
             itemView.setOnClickListener(this);
         }
 
@@ -86,6 +90,13 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         if (image != null) {
             Picasso.with(mContext).load(image.url).into(holder.image);
         }
+
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override

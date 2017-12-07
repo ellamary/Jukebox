@@ -1,3 +1,8 @@
+TODO DECEMBER 7:
+-add song application (like item application in ShoppingList)
+-add recycler view functionality for QueueActivity
+-fix everything
+
 TODO:
 - figure out spotify
     - min: items in song object
