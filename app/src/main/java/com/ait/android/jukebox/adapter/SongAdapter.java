@@ -2,6 +2,7 @@ package com.ait.android.jukebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,18 +48,33 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Song song = songList.get(position);
+        final Song song = songList.get(position);
 
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
-        holder.tvScore.setText(song.getScore());
-
+        holder.tvScore.setText(Integer.toString(song.getScore()));
         holder.btnVeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 removePost(holder.getAdapterPosition());
+            }
+        });
 
+        holder.btnUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                song.setScore((song.getScore())+1);
+                notifyDataSetChanged();
+            }
+        });
 
+        holder.btnDown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (song.getScore() > 0) {
+                    song.setScore((song.getScore()) - 1);
+                    notifyDataSetChanged();
+                }
             }
         });
 
