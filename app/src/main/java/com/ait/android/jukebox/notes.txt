@@ -1,3 +1,8 @@
+TODO DECEMBER 10:
+-put extra from MainActivity to QueueActivity to add songs
+(so, "add to playlist" button should add song to queue)
+-make sure queue is stored in firebase
+
 TODO DECEMBER 7:
 -add song application (like item application in ShoppingList)
 -add recycler view functionality for QueueActivity
