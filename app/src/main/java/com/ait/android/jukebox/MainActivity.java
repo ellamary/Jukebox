@@ -7,11 +7,16 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 
 import com.ait.android.jukebox.adapter.SearchResultsAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Track;
@@ -22,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     private static final String KEY_CURRENT_QUERY = "CURRENT_QUERY";
 
     private Search.ActionListener mActionListener;
+    public static final int REQUEST_CODE_QUEUE = 1;
+
+
+    public ArrayList<Track> tempQueue = new ArrayList<>();
 
     private LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     private ScrollListener mScrollListener = new ScrollListener(mLayoutManager);
@@ -130,6 +139,42 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     protected void onDestroy() {
         mActionListener.destroy();
         super.onDestroy();
+    }
+
+    public void addToTempQueue(Track track){
+        tempQueue.add(track);
+        Log.d("title",track.name);
+        Log.d("queue1",tempQueue.get(0).name);
+
+    }
+
+    public void openQueueActivity(){
+        Intent intent = new Intent(this, QueueActivity.class);
+        intent.putExtra("queue", tempQueue);
+
+        //not working, see error log
+        //Log.d("queue1",tempQueue.get(0).name);
+        this.setResult(RESULT_OK,intent);
+        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
+//                ((Activity) mContext).setResult(RESULT_OK,intent);
+//                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.openQueueActivity:
+                openQueueActivity();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
 }
