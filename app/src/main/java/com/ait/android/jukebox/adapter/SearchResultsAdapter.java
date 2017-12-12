@@ -35,6 +35,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     private final List<Track> mItems = new ArrayList<>();
     private final Context mContext;
     private final ItemSelectedListener mListener;
+    public static final int REQUEST_CODE_ADD_TRACK = 2;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -105,10 +106,15 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             @Override
             public void onClick(View view) {
                 //SongRecyclerAdapter.addItem
-//                Intent intent = new Intent(mContext, QueueActivity.class);
-//                intent.putExtra("track", item);
+                Intent intent = new Intent((MainActivity) mContext, QueueActivity.class);
+                intent.putExtra("track", "test");
+                //intent.putExtra("track", item);
 //                ((Activity) mContext).setResult(RESULT_OK,intent);
 //                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
+                mContext.startActivity(intent);
+
+                //todo unsure if we need to call finish() here
+                ((Activity) mContext).finish();
 
 //                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
 //                SharedPreferences.Editor edit = sp.edit();
@@ -116,7 +122,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 //                String json = gson.toJson(item);
 //                edit.putString("track", json);
 //                edit.commit();
-                ((MainActivity) mContext).addToTempQueue(item);
+//                ((MainActivity) mContext).addToTempQueue(item);
 
             }
         });
