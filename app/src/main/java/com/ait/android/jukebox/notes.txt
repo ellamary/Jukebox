@@ -1,3 +1,16 @@
+todo and notes december 12
+From Mari:
+I changed the Song class so that it pulls information from the Track object. It also has a "track" field.
+Need to:
+-figure out how to store the songs to-add in a temporary queue that will be added to the bigger "queue" that
+is viewed in QueueActivity. This queue should be stored even if the user performs multiple searches for songs.
+This is what I was trying to do with the "tempqueue" variable in MainActivity, but it's not working/storing
+the songs.
+-figure out how to pass this tempqueue of Track objects into the Queue Activity as an extra
+
+TODO DECEMBER 11
+-figure out how to combine firebase login w/ login for spotify
+
 TODO DECEMBER 10:
 -put extra from MainActivity to QueueActivity to add songs
 (so, "add to playlist" button should add song to queue)

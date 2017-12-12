@@ -2,7 +2,6 @@ package com.ait.android.jukebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,14 +11,19 @@ import android.widget.TextView;
 
 import com.ait.android.jukebox.R;
 import com.ait.android.jukebox.data.Song;
-//import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import kaaes.spotify.webapi.android.models.Image;
+import kaaes.spotify.webapi.android.models.Track;
 
+/**
+ * Created by Mari Kamiya on 12/10/2017.
+ */
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 
     private Context context;
@@ -35,10 +39,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         songList = new ArrayList<Song>();
         songKeys = new ArrayList<String>();
 
-        postsRef = FirebaseDatabase.getInstance().getReference();
+        songsRef = FirebaseDatabase.getInstance().getReference();
     }
 
-    private DatabaseReference postsRef;
+    private DatabaseReference songsRef;
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -53,6 +57,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
         holder.tvScore.setText(Integer.toString(song.getScore()));
+        Image image = song.getImage();
+        if (image != null) {
+            Picasso.with(context).load(image.url).into(holder.ivCoverart);
+        }
         holder.btnVeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,7 +68,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
             }
         });
 
-        holder.btnUp.setOnClickListener(new View.OnClickListener() {
+        holder.btnUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 song.setScore((song.getScore())+1);
@@ -68,7 +76,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
             }
         });
 
-        holder.btnDown.setOnClickListener(new View.OnClickListener() {
+        holder.btnDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (song.getScore() > 0) {
@@ -81,7 +89,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
     }
 
     public void removePost(int index) {
-        postsRef.child("posts").child(songKeys.get(index)).removeValue();
+        songsRef.child("posts").child(songKeys.get(index)).removeValue();
         songList.remove(index);
         songKeys.remove(index);
         notifyItemRemoved(index);
@@ -93,7 +101,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
             songList.remove(index);
             songKeys.remove(index);
             notifyItemRemoved(index);
-        }
+    }
     }
 
 
@@ -102,10 +110,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         return songList.size();
     }
 
-    public void addPost(Song song, String key) {
-        songList.add(song);
+    public void addPost(Track track, String key) {
+//        songList.add(song);
         songKeys.add(key);
-
+//        trackList.add(track);
+        Song newSong = new Song(track);
+        songList.add(newSong);
         notifyDataSetChanged();
     }
 
@@ -114,21 +124,23 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         public TextView tvTitle;
         public TextView tvArtist;
         public TextView tvScore;
+        public TextView tvAuthor;
         public Button btnVeto;
-        public Button btnUp;
-        public Button btnDown;
-        public ImageView ivPostImg;
+        public Button btnUpVote;
+        public Button btnDownVote;
+        public ImageView ivCoverart;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvTitle = itemView.findViewById(R.id.entity_title);
             tvArtist = itemView.findViewById(R.id.tvArtist);
             tvScore = itemView.findViewById(R.id.tvScore);
+            tvAuthor = itemView.findViewById(R.id.tvAuthor);
             btnVeto = itemView.findViewById(R.id.btnVeto);
-            ivPostImg = itemView.findViewById(R.id.ivPostImg);
-            btnUp = itemView.findViewById(R.id.btnUp);
-            btnDown = itemView.findViewById(R.id.btnDown);
+            ivCoverart = itemView.findViewById(R.id.entity_image);
+            btnUpVote = itemView.findViewById(R.id.btnUpVote);
+            btnDownVote = itemView.findViewById(R.id.btnDownVote);
         }
     }
 }

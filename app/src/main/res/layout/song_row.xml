@@ -12,9 +12,40 @@
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:contentDescription="cover art description"/>
+        android:contentDescription="cover art description" />
 
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnUpVote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/btnDownVote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnUpVote"
+            android:text="-" />
+        <Button
+            android:id="@+id/btnVeto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnDownVote"
+            android:text="Veto"/>
+
+        <TextView
+            android:id="@+id/tvScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@id/btnUpVote"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/songInfo"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -28,11 +59,10 @@
             android:gravity="bottom"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            />
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/entity_subtitle"
+            android:id="@+id/tvArtist"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -40,8 +70,14 @@
             android:gravity="top"
             android:maxLines="1"
             android:scrollHorizontally="true"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:textAppearance="?android:attr/textAppearanceSmall" />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>
