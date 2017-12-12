@@ -157,13 +157,12 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     }
 
     public void openQueueActivity(){
-        Intent intent = new Intent(this, QueueActivity.class);
-        intent.putExtra("queue", tempQueue);
+        Intent intent = new Intent(MainActivity.this, QueueActivity.class);
+//        this.setResult(RESULT_OK,intent);
+//        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
+        startActivity(intent);
+        finish();
 
-        //not working, see error log
-        //Log.d("queue1",tempQueue.get(0).name);
-        this.setResult(RESULT_OK,intent);
-        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
 //                ((Activity) mContext).setResult(RESULT_OK,intent);
 //                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
     }

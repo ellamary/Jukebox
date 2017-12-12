@@ -65,7 +65,7 @@ public class QueueActivity extends AppCompatActivity {
     }
 
 
-    private void initPostsListener() {
+    public void initPostsListener() {
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts");
         reference.addChildEventListener(new ChildEventListener() {
             @Override

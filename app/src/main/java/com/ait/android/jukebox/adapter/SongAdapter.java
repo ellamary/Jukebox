@@ -118,11 +118,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         public TextView tvTitle;
         public TextView tvArtist;
         public TextView tvScore;
-        public TextView tvAuthor;
         public Button btnVeto;
         public Button btnUpVote;
         public Button btnDownVote;
-        public ImageView ivCoverart;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -130,9 +128,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
             tvTitle = itemView.findViewById(R.id.entity_title);
             tvArtist = itemView.findViewById(R.id.tvArtist);
             tvScore = itemView.findViewById(R.id.tvScore);
-            tvAuthor = itemView.findViewById(R.id.tvAuthor);
             btnVeto = itemView.findViewById(R.id.btnVeto);
-            ivCoverart = itemView.findViewById(R.id.entity_image);
             btnUpVote = itemView.findViewById(R.id.btnUpVote);
             btnDownVote = itemView.findViewById(R.id.btnDownVote);
         }

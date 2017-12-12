@@ -50,7 +50,6 @@
             android:id="@+id/tvScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@id/btnUpVote"
             android:text="0"
             android:textSize="30dp"/>
 
@@ -64,13 +63,11 @@
             android:id="@+id/btnDownVote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnUpVote"
             android:text="-" />
         <Button
             android:id="@+id/btnVeto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/btnDownVote"
             android:text="Veto"/>
 
 

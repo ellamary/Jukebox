@@ -51,12 +51,13 @@ public class Song {
     }
 
     public String getArtist() {
-        List<String> names = new ArrayList<>();
-        for (ArtistSimple i : track.artists) {
-            names.add(i.name);
-        }
-        Joiner joiner = Joiner.on(", ");
-        return joiner.join(names);
+//        List<String> names = new ArrayList<>();
+//        for (ArtistSimple i : track.artists) {
+//            names.add(i.name);
+//        }
+//        Joiner joiner = Joiner.on(", ");
+//        return joiner.join(names);
+        return "artist";
     }
 
     public Track getTrack() {
