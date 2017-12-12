@@ -50,9 +50,14 @@ public class Song {
         return track.name;
     }
 
-//    public String getArtist() {
-//        return track.artist;
-//    }
+    public String getArtist() {
+        List<String> names = new ArrayList<>();
+        for (ArtistSimple i : track.artists) {
+            names.add(i.name);
+        }
+        Joiner joiner = Joiner.on(", ");
+        return joiner.join(names);
+    }
 
     public Track getTrack() {
         return track;

@@ -21,9 +21,6 @@ import java.util.List;
 import kaaes.spotify.webapi.android.models.Image;
 import kaaes.spotify.webapi.android.models.Track;
 
-/**
- * Created by Mari Kamiya on 12/10/2017.
- */
 public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 
     private Context context;
@@ -52,7 +49,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         final Song song = songList.get(position);
 
         holder.tvTitle.setText(song.getTitle());
-//        holder.tvArtist.setText(song.getArtist());
+        holder.tvArtist.setText(song.getArtist());
 //        holder.tvScore.setText(Integer.toString(song.getScore()));
 //        Image image = song.getImage();
 //        if (image != null) {
