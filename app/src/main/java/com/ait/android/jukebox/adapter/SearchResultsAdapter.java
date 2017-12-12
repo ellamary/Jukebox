@@ -16,8 +16,10 @@ import android.widget.TextView;
 import com.ait.android.jukebox.MainActivity;
 import com.ait.android.jukebox.QueueActivity;
 import com.ait.android.jukebox.R;
-import com.ait.android.jukebox.data.SongList;
+import com.ait.android.jukebox.data.Song;
+import com.ait.android.jukebox.data.SongManager;
 import com.google.common.base.Joiner;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
 
@@ -106,24 +108,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         holder.btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //SongRecyclerAdapter.addItem
-//                Intent intent = new Intent((MainActivity) mContext, QueueActivity.class);
-//                intent.putExtra("track", "test");
-                //intent.putExtra("track", item);
-//                ((Activity) mContext).setResult(RESULT_OK,intent);
-//                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
-//                mContext.startActivity();
-
-                //todo unsure if we need to call finish() here
-                ((Activity) mContext).finish();
-
-//                SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(mContext);
-//                SharedPreferences.Editor edit = sp.edit();
-//                Gson gson = new Gson();
-//                String json = gson.toJson(item);
-//                edit.putString("track", json);
-//                edit.commit();
-//                ((MainActivity) mContext).addToTempQueue(item);
+                addSong(item);
+                //((Activity) mContext).finish();
 
             }
         });
@@ -132,5 +118,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
     @Override
     public int getItemCount() {
         return mItems.size();
+    }
+
+    private void addSong(Track track) {
+        String key = FirebaseDatabase.getInstance().getReference().child("posts").push().getKey();
+        Song newSong = new Song(track);
+
+        FirebaseDatabase.getInstance().getReference().child("posts").child(key).setValue(newSong);
     }
 }
