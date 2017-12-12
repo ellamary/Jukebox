@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import com.ait.android.jukebox.adapter.SearchResultsAdapter;
 import com.ait.android.jukebox.adapter.SongAdapter;
 import com.ait.android.jukebox.data.Song;
+import com.ait.android.jukebox.data.SongList;
 import com.ait.android.jukebox.touch.SongTouchHelperCallback;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -38,7 +39,6 @@ public class QueueActivity extends AppCompatActivity {
 
     public SongAdapter adapter;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +50,7 @@ public class QueueActivity extends AppCompatActivity {
         //toolbar.setLogo(R.mipmap.ic_launcher);
 
         RecyclerView recyclerViewItem = (RecyclerView) findViewById(R.id.recyclerItem);
-        adapter = new SongAdapter(this, FirebaseAuth.getInstance().getCurrentUser().getUid());
+        adapter = new SongAdapter(this);
 
         recyclerViewItem.setAdapter(adapter);
 

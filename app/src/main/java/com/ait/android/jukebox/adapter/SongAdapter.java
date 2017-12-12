@@ -29,13 +29,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
     private Context context;
     public List<Song> songList;
     public List<String> songKeys;
-    private String uId;
     private int lastPosition = -1;
 
-    public SongAdapter(Context context, String uId) {
+    public SongAdapter(Context context) {
         this.context = context;
-        this.uId = uId;
-
         songList = new ArrayList<Song>();
         songKeys = new ArrayList<String>();
 

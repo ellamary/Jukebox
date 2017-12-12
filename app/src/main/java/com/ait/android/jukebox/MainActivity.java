@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.SearchView;
 
 import com.ait.android.jukebox.adapter.SearchResultsAdapter;
+import com.ait.android.jukebox.data.SongList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     private LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     private ScrollListener mScrollListener = new ScrollListener(mLayoutManager);
     private SearchResultsAdapter mAdapter;
+
+    SongList songList;
+
 
 
     private class ScrollListener extends ResultListScrollListener {
@@ -63,6 +67,10 @@ public class MainActivity extends AppCompatActivity implements Search.View {
 
         mActionListener = new SearchPresenter(this, this);
         mActionListener.init(token);
+
+        if(songList == null) {
+            //pull from firebase
+        }
 
         //Log.d("token", "my token"+token);
 

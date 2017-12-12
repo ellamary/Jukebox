@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.ait.android.jukebox.MainActivity;
 import com.ait.android.jukebox.QueueActivity;
 import com.ait.android.jukebox.R;
+import com.ait.android.jukebox.data.SongList;
 import com.google.common.base.Joiner;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
@@ -32,7 +33,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder> {
 
-    private final List<Track> mItems = new ArrayList<>();
+    private final List<Track> mItems = new ArrayList<Track>();
     private final Context mContext;
     private final ItemSelectedListener mListener;
     public static final int REQUEST_CODE_ADD_TRACK = 2;
@@ -106,12 +107,12 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             @Override
             public void onClick(View view) {
                 //SongRecyclerAdapter.addItem
-                Intent intent = new Intent((MainActivity) mContext, QueueActivity.class);
-                intent.putExtra("track", "test");
+//                Intent intent = new Intent((MainActivity) mContext, QueueActivity.class);
+//                intent.putExtra("track", "test");
                 //intent.putExtra("track", item);
 //                ((Activity) mContext).setResult(RESULT_OK,intent);
 //                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
-                mContext.startActivity(intent);
+//                mContext.startActivity();
 
                 //todo unsure if we need to call finish() here
                 ((Activity) mContext).finish();

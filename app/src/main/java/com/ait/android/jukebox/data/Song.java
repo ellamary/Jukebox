@@ -87,6 +87,10 @@ public class Song {
         this.score = score;
     }
 
+    public void upvote() { score++; }
+
+    public void downvote() { score--; }
+
     public String getUri() {
         return uri;
     }
