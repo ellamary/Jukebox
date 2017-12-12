@@ -52,12 +52,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         final Song song = songList.get(position);
 
         holder.tvTitle.setText(song.getTitle());
-        holder.tvArtist.setText(song.getArtist());
-        holder.tvScore.setText(Integer.toString(song.getScore()));
-        Image image = song.getImage();
-        if (image != null) {
-            Picasso.with(context).load(image.url).into(holder.ivCoverart);
-        }
+//        holder.tvArtist.setText(song.getArtist());
+//        holder.tvScore.setText(Integer.toString(song.getScore()));
+//        Image image = song.getImage();
+//        if (image != null) {
+//            Picasso.with(context).load(image.url).into(holder.ivCoverart);
+//        }
         holder.btnVeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

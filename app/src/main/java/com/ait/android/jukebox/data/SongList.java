@@ -9,7 +9,7 @@ import kaaes.spotify.webapi.android.models.Track;
  * Created by ellamary on 12/12/17.
  */
 
-public class SongManager {
+public class SongList {
 
     private static SongList songList = null;
 
