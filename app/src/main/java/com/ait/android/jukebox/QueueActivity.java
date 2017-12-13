@@ -13,6 +13,7 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.ait.android.jukebox.adapter.SearchResultsAdapter;
 import com.ait.android.jukebox.adapter.SongAdapter;
@@ -26,18 +27,28 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+
 import java.util.ArrayList;
+import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Track;
 
-public class QueueActivity extends AppCompatActivity {
+import static com.ait.android.jukebox.MainActivity.token;
+
+public class QueueActivity extends AppCompatActivity implements Preview.View {
 
     public static final String KEY_ITEM_ID = "KEY_ITEM_ID";
     public static final int REQUEST_CODE_QUEUE = 1;
 
     private int positionToEdit = -1;
+    private Preview.ActionListener mActionListener;
+
+    public static List<Song> songsToPlay;
+//    String token = CredentialsHandler.getToken(this);
+
 
     public SongAdapter adapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +59,18 @@ public class QueueActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         //toolbar.setLogo(R.mipmap.ic_launcher);
+        songsToPlay = new ArrayList<Song>();
+
+        mActionListener = new PreviewPresenter(this, this);
+        mActionListener.init(token);
 
         RecyclerView recyclerViewItem = (RecyclerView) findViewById(R.id.recyclerItem);
-        adapter = new SongAdapter(this);
+        adapter = new SongAdapter(this, new SongAdapter.ItemSelectedListener(){
+            @Override
+            public void onItemSelected(View itemView, Track item) {
+                mActionListener.selectTrack(item);
+            }
+        });
 
         recyclerViewItem.setAdapter(adapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -61,6 +81,11 @@ public class QueueActivity extends AppCompatActivity {
 
         initPostsListener();
 
+    }
+
+    @Override
+    public void reset() {
+//        adapter.clearData();
     }
 
 

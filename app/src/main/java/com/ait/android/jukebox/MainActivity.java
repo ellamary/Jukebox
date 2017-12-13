@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     private Search.ActionListener mActionListener;
     public static final int REQUEST_CODE_QUEUE = 1;
 
+    public static String token;
+
 
     public ArrayList<Track> tempQueue = new ArrayList<>();
 
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements Search.View {
         setContentView(R.layout.activity_main);
 
         Intent intent = getIntent();
-        String token = intent.getStringExtra(EXTRA_TOKEN);
+        token = intent.getStringExtra(EXTRA_TOKEN);
 
         mActionListener = new SearchPresenter(this, this);
         mActionListener.init(token);
@@ -150,6 +152,7 @@ public class MainActivity extends AppCompatActivity implements Search.View {
 
     public void openQueueActivity(){
         Intent intent = new Intent(MainActivity.this, QueueActivity.class);
+//        intent.putExtra("EXTRA_TOKEN",token);
 //        this.setResult(RESULT_OK,intent);
 //        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
         startActivity(intent);
