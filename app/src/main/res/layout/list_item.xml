@@ -4,27 +4,30 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
     android:background="?android:attr/selectableItemBackground"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:weightSum="7">
 
     <ImageView
         android:id="@+id/entity_image"
-        android:layout_width="60dp"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:contentDescription="cover art description"/>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="5">
 
         <TextView
             android:id="@+id/entity_title"
-            android:layout_width="match_parent"
+            android:layout_width="fill_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Song Title Song Title"
+            android:text="Song Title Song Title Song"
             android:ellipsize="marquee"
             android:gravity="bottom"
             android:maxLines="1"
@@ -46,10 +49,14 @@
 
     </LinearLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_add"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:text="Add to playlist"/>
+        android:background="null"
+        android:src="@drawable/ic_add"
+        />
 
 </LinearLayout>

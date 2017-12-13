@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -221,9 +222,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         public TextView tvTitle;
         public TextView tvArtist;
         public TextView tvScore;
-        public Button btnVeto;
-        public Button btnUpVote;
-        public Button btnDownVote;
+        public ImageButton btnVeto;
+        public ImageButton btnUpVote;
+        public ImageButton btnDownVote;
 
         public ViewHolder(View itemView) {
             super(itemView);
