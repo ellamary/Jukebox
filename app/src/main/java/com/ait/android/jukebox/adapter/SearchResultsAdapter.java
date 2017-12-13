@@ -1,47 +1,30 @@
 package com.ait.android.jukebox.adapter;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.ait.android.jukebox.MainActivity;
-import com.ait.android.jukebox.QueueActivity;
 import com.ait.android.jukebox.R;
 import com.ait.android.jukebox.data.Song;
-import com.ait.android.jukebox.data.SongList;
 import com.google.common.base.Joiner;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import kaaes.spotify.webapi.android.models.ArtistSimple;
 import kaaes.spotify.webapi.android.models.Image;
 import kaaes.spotify.webapi.android.models.Track;
-
-import static android.app.Activity.RESULT_OK;
-import static android.content.Context.MODE_PRIVATE;
 
 public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdapter.ViewHolder> {
 
     private final List<Track> mItems = new ArrayList<Track>();
     private final Context mContext;
     private final ItemSelectedListener mListener;
-    public static final int REQUEST_CODE_ADD_TRACK = 2;
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -52,10 +35,10 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
 
         public ViewHolder(View itemView) {
             super(itemView);
-            title = (TextView) itemView.findViewById(R.id.entity_title);
-            subtitle = (TextView) itemView.findViewById(R.id.entity_subtitle);
-            image = (ImageView) itemView.findViewById(R.id.entity_image);
-            btnAdd = (ImageButton) itemView.findViewById(R.id.btn_add);
+            title = itemView.findViewById(R.id.entity_title);
+            subtitle = itemView.findViewById(R.id.entity_subtitle);
+            image = itemView.findViewById(R.id.entity_image);
+            btnAdd = itemView.findViewById(R.id.btn_add);
             itemView.setOnClickListener(this);
         }
 
@@ -113,9 +96,6 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             public void onClick(View view) {
                 addSong(item);
                 Toast.makeText(mContext, "Added!", Toast.LENGTH_LONG).show();
-
-                //((Activity) mContext).finish();
-
             }
         });
     }
@@ -130,8 +110,5 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         Song newSong = new Song(track);
 
         FirebaseDatabase.getInstance().getReference().child("posts").child(key).setValue(newSong);
-                Log.d("newSong track",newSong.getTitle());
-
-        SongList.getInstance().addSong(track);
     }
 }

@@ -2,6 +2,7 @@ package com.ait.android.jukebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,12 +30,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 
     public List<Song> songList;
     public List<String> songKeys;
-    private int lastPosition = -1;
 
     public SongAdapter(Context context, ItemSelectedListener listener) {
         this.context = context;
-        songList = new ArrayList<Song>();
-        songKeys = new ArrayList<String>();
+        songList = new ArrayList<>();
+        songKeys = new ArrayList<>();
         songsRef = FirebaseDatabase.getInstance().getReference();
         mListener = listener;
     }
@@ -158,16 +158,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         }
     }
 
-
     @Override
     public int getItemCount() {
         return songList.size();
     }
 
     public void addPost(Track track, String key) {
-//        songList.add(song);
         songKeys.add(key);
-//        trackList.add(track);
         Song newSong = new Song(track);
         songList.add(newSong);
         notifyDataSetChanged();
@@ -178,11 +175,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         songList.add(song);
         QueueActivity.songsToPlay.add(song);
         notifyDataSetChanged();
-    }
-
-    public void updatePost(Song song, String key) {
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(key);
-        DatabaseReference scoreReference = reference.child("score");
     }
 
     public int identifyPosUpvote(int currentIndex, int compareIndex) {
@@ -256,16 +248,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
             btnUpVote = itemView.findViewById(R.id.btnUpVote);
             btnDownVote = itemView.findViewById(R.id.btnDownVote);
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View v) {
             notifyItemChanged(getLayoutPosition());
             mListener.onItemSelected(v, songList.get(getAdapterPosition()).getTrack());
-//            for (int i = getAdapterPosition(); i < songList.size(); i++) {
-//                mListener.onItemSelected(v, songList.get(i).getTrack());
-//            }
         }
     }
 }

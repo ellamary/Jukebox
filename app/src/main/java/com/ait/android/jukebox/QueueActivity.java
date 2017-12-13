@@ -8,19 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.ait.android.jukebox.adapter.SearchResultsAdapter;
 import com.ait.android.jukebox.adapter.SongAdapter;
 import com.ait.android.jukebox.data.Song;
-import com.ait.android.jukebox.data.SongList;
-import com.ait.android.jukebox.touch.SongTouchHelperCallback;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -37,16 +30,9 @@ import static com.ait.android.jukebox.MainActivity.token;
 
 public class QueueActivity extends AppCompatActivity implements Preview.View {
 
-    public static final String KEY_ITEM_ID = "KEY_ITEM_ID";
     public static final int REQUEST_CODE_QUEUE = 1;
-
-    private int positionToEdit = -1;
     private Preview.ActionListener mActionListener;
-
     public static List<Song> songsToPlay;
-//    String token = CredentialsHandler.getToken(this);
-
-
     public SongAdapter adapter;
 
 
@@ -55,10 +41,6 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
 
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
-        //setSupportActionBar(toolbar);
-
-        //toolbar.setLogo(R.mipmap.ic_launcher);
         songsToPlay = new ArrayList<Song>();
 
         mActionListener = new PreviewPresenter(this, this);
@@ -101,9 +83,7 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.d("OnChildChanged", "OnChildChanged");
-                Song song = dataSnapshot.getValue(Song.class);
-                adapter.updatePost(song, dataSnapshot.getKey());
+
             }
 
             @Override
@@ -124,16 +104,6 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
     }
 
     @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -151,13 +121,8 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
 
     public void openMainActivity(){
         Intent intent = new Intent(QueueActivity.this, MainActivity.class);
-//        this.setResult(RESULT_OK,intent);
-//        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
         startActivity(intent);
         finish();
-
-//                ((Activity) mContext).setResult(RESULT_OK,intent);
-//                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
     }
 
     @Override
@@ -176,21 +141,4 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
 
         return super.onOptionsItemSelected(item);
     }
-
-    //TODO I commented this out because it said "method does not override method from its superclass"
-//    @SuppressWarnings("StatementWithEmptyBody")
-//    @Override
-//    public boolean onNavigationItemSelected(MenuItem item) {
-//        // Handle navigation view item clicks here.
-//        int id = item.getItemId();
-//
-//        if (id == R.id.nav_logout) {
-//            FirebaseAuth.getInstance().signOut();
-//            finish();
-//        }
-//
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        drawer.closeDrawer(GravityCompat.START);
-//        return true;
-//    }
 }

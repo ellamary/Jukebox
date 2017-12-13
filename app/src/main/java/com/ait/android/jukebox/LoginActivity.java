@@ -53,7 +53,6 @@ public class LoginActivity extends Activity {
             switch (response.getType()) {
                 // Response was successful and contains auth token
                 case TOKEN:
-                    logMessage("Got token: " + response.getAccessToken());
                     CredentialsHandler.setToken(this, response.getAccessToken(), response.getExpiresIn(), TimeUnit.SECONDS);
                     startMainActivity(response.getAccessToken());
                     break;
@@ -78,12 +77,12 @@ public class LoginActivity extends Activity {
     }
 
     private void logError(String msg) {
-        Toast.makeText(this, "Error: " + msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, "Error: " + msg, Toast.LENGTH_SHORT).show();
         Log.e(TAG, msg);
     }
 
     private void logMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
         Log.d(TAG, msg);
     }
 }

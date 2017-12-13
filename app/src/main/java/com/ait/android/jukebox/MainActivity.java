@@ -1,23 +1,18 @@
 package com.ait.android.jukebox;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
 
 import com.ait.android.jukebox.adapter.SearchResultsAdapter;
-import com.ait.android.jukebox.data.SongList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import kaaes.spotify.webapi.android.models.Track;
@@ -28,19 +23,12 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     private static final String KEY_CURRENT_QUERY = "CURRENT_QUERY";
 
     private Search.ActionListener mActionListener;
-    public static final int REQUEST_CODE_QUEUE = 1;
 
     public static String token;
-
-
-    public ArrayList<Track> tempQueue = new ArrayList<>();
 
     private LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
     private ScrollListener mScrollListener = new ScrollListener(mLayoutManager);
     private SearchResultsAdapter mAdapter;
-
-    SongList songList;
-
 
 
     private class ScrollListener extends ResultListScrollListener {
@@ -70,12 +58,6 @@ public class MainActivity extends AppCompatActivity implements Search.View {
         mActionListener = new SearchPresenter(this, this);
         mActionListener.init(token);
 
-        if(SongList.getInstance().getQueue() == null) {
-            SongList.getInstance().init();
-            //pull from firebase
-        }
-
-        // Setup search field
         final SearchView searchView = (SearchView) findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -106,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements Search.View {
         resultsList.setAdapter(mAdapter);
         resultsList.addOnScrollListener(mScrollListener);
 
-        // If Activity was recreated wit active search restore it
+        // If Activity was recreated with active search restore it
         if (savedInstanceState != null) {
             String currentQuery = savedInstanceState.getString(KEY_CURRENT_QUERY);
             mActionListener.search(currentQuery);
@@ -152,14 +134,8 @@ public class MainActivity extends AppCompatActivity implements Search.View {
 
     public void openQueueActivity(){
         Intent intent = new Intent(MainActivity.this, QueueActivity.class);
-//        intent.putExtra("EXTRA_TOKEN",token);
-//        this.setResult(RESULT_OK,intent);
-//        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
         startActivity(intent);
         finish();
-
-//                ((Activity) mContext).setResult(RESULT_OK,intent);
-//                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
     }
 
     @Override
