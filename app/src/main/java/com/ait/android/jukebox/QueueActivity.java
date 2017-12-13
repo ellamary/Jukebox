@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -43,6 +44,7 @@ public class QueueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
+        Log.d("line", "line 47 in queue activity");
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //setSupportActionBar(toolbar);
@@ -53,7 +55,7 @@ public class QueueActivity extends AppCompatActivity {
         adapter = new SongAdapter(this);
 
         recyclerViewItem.setAdapter(adapter);
-
+        Log.d("line","line 57 in queueactivity");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
@@ -66,11 +68,15 @@ public class QueueActivity extends AppCompatActivity {
 
 
     public void initPostsListener() {
+        Log.d("line","line 71 in queue activity");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts");
+        Log.d("line","line 73 in queue activity");
+
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Track track = dataSnapshot.getValue(Track.class);
+                Log.d("track",track.name);
                 adapter.addPost(track, dataSnapshot.getKey());
             }
 
@@ -94,6 +100,8 @@ public class QueueActivity extends AppCompatActivity {
 
             }
         });
+        Log.d("line","line 103 in queue activity");
+
     }
 
     @Override
