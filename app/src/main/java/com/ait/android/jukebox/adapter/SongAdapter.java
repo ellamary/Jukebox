@@ -58,11 +58,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 //        Log.d("on bind view holder", song.getTitle());
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
-//        holder.tvScore.setText(Integer.toString(song.getScore()));
+//        holder.tvScore.setText(Integer.toString(song. getScore()));
 //        Image image = song.getImage();
 //        if (image != null) {
 //            Picasso.with(context).load(image.url).into(holder.ivCoverart);
 //        }
+        holder.tvScore.setText("" + song.getScore());
+
         holder.btnVeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,9 +83,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 int currentScore = song.getScore();
                 currentScore++;
                 scoreReference.setValue(currentScore);
+//
+//                holder.tvScore.setText(currentScore);
+//                song.setScore(currentScore);
+                songList.get(position).setScore(currentScore);
+                holder.tvScore.setText("" + currentScore);
 
-                holder.tvScore.setText(currentScore);
-                song.setScore(currentScore);
                 notifyDataSetChanged();
             }
         });
@@ -96,9 +101,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 DatabaseReference scoreReference = reference.child("score");
 
                 int currentScore = song.getScore();
-
-                scoreReference.setValue(currentScore - 1);
-                //song.setScore((song.getScore())+1);
 
                 notifyDataSetChanged();
             }
@@ -144,6 +146,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
     }
 
     public void updatePost(Song song, String key) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(key);
+        DatabaseReference scoreReference = reference.child("score");
+
 
     }
 

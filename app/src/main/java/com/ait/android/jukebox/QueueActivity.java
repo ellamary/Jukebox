@@ -76,6 +76,7 @@ public class QueueActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.d("OnChildChanged", "OnChildChanged");
                 Song song = dataSnapshot.getValue(Song.class);
                 adapter.updatePost(song, dataSnapshot.getKey());
             }
