@@ -68,9 +68,9 @@ public class Song {
         this.track = track;
     }
 
-//    public Image getImage() {
-//        return track.;
-//    }
+    public Image getImage() {
+        return track.album.images.get(0);
+    }
 
     public int getScore() {
         return score;

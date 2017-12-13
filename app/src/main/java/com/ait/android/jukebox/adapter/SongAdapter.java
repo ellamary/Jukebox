@@ -2,11 +2,9 @@ package com.ait.android.jukebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,16 +12,13 @@ import android.widget.TextView;
 import com.ait.android.jukebox.QueueActivity;
 import com.ait.android.jukebox.R;
 import com.ait.android.jukebox.data.Song;
-import com.ait.android.jukebox.data.SongList;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import kaaes.spotify.webapi.android.models.ArtistSimple;
 import kaaes.spotify.webapi.android.models.Image;
 import kaaes.spotify.webapi.android.models.Track;
 
@@ -40,10 +35,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         this.context = context;
         songList = new ArrayList<Song>();
         songKeys = new ArrayList<String>();
-        Log.d("line", "line 37 in song adapter");
         songsRef = FirebaseDatabase.getInstance().getReference();
         mListener = listener;
-        Log.d("line", "line 39 in song adapter");
     }
 
     private DatabaseReference songsRef;
@@ -55,22 +48,19 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_row, parent, false);
-        Log.d("line", "line 49 in on create view holder");
         return new ViewHolder(row);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Log.d("line", "line 55 in song adapter");
         final Song song = songList.get(position);
-//        Log.d("on bind view holder", song.getTitle());
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
-//        holder.tvScore.setText(Integer.toString(song. getScore()));
-//        Image image = song.getImage();
-//        if (image != null) {
-//            Picasso.with(context).load(image.url).into(holder.ivCoverart);
-//        }
+        holder.tvScore.setText(Integer.toString(song. getScore()));
+        Image image = song.getImage();
+        if (image != null) {
+            Picasso.with(context).load(image.url).into(holder.ivCoverArt);
+        }
         holder.tvScore.setText("" + song.getScore());
 
         holder.btnVeto.setOnClickListener(new View.OnClickListener() {
@@ -250,6 +240,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         public TextView tvTitle;
         public TextView tvArtist;
         public TextView tvScore;
+        public ImageView ivCoverArt;
         public ImageButton btnVeto;
         public ImageButton btnUpVote;
         public ImageButton btnDownVote;
@@ -257,6 +248,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         public ViewHolder(View itemView) {
             super(itemView);
 
+            ivCoverArt = itemView.findViewById(R.id.ivCoverArt);
             tvTitle = itemView.findViewById(R.id.entity_title);
             tvArtist = itemView.findViewById(R.id.tvArtist);
             tvScore = itemView.findViewById(R.id.tvScore);

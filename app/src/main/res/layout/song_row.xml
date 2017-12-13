@@ -3,14 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="5dp"
-    android:background="?android:attr/selectableItemBackground"
+    android:paddingRight="5dp"
+    android:paddingLeft="5dp"
+    android:background="@color/black"
     android:orientation="horizontal"
-    android:weightSum="9">
+    android:weightSum="12">
 
     <ImageView
-        android:id="@+id/entity_image_queue"
+        android:id="@+id/ivCoverArt"
         android:layout_width="0dp"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_height="60dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -21,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_weight="5">
+        android:layout_weight="7">
 
         <TextView
             android:id="@+id/entity_title"
@@ -29,6 +31,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Song Title Song Title Song"
+            android:textColor="@color/lightGray"
             android:ellipsize="marquee"
             android:gravity="bottom"
             android:maxLines="1"
@@ -42,6 +45,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:text="Artist"
+            android:textColor="@color/lightGray"
             android:ellipsize="marquee"
             android:gravity="top"
             android:maxLines="1"
@@ -57,26 +61,34 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="0"
-        android:textSize="30dp"/>
+        android:textAlignment="center"
+        android:textColor="@color/lightGray"
+        android:autoSizeTextType="uniform"/>
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_weight="1"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:paddingRight="2dp"
         android:orientation="vertical">
 
         <ImageButton
             android:id="@+id/btnUpVote"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_weight="1"
             android:layout_height="0dp"
+            android:background="@null"
+            android:layout_marginBottom="2dp"
             android:src="@drawable/ic_expand_less" />
 
         <ImageButton
             android:id="@+id/btnDownVote"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_weight="1"
             android:layout_height="0dp"
+            android:layout_marginTop="2dp"
+            android:background="@null"
             android:src="@drawable/ic_expand_more" />
 
     </LinearLayout>
@@ -87,6 +99,8 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
+        android:paddingLeft="2dp"
+        android:background="@null"
         android:src="@drawable/ic_close"/>
 
 </LinearLayout>
