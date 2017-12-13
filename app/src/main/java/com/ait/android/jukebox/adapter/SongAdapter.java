@@ -94,11 +94,20 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 songList.get(position).setScore(currentScore);
                 holder.tvScore.setText("" + currentScore);
 
-                if (position != 0) {
-                    int index = identifyPosUpvote(position, position - 1);
+                if (position != songKeys.size()-1) {
+                    int i = 0;
 
-                    if (position != index) {
-                        shiftUpvote(position, index);
+                    while (songList.get(position).getScore() > songList.get(position+1).getScore()) {
+                        Song songTemp = songList.get(position);
+                        String keyTemp = songKeys.get(position);
+
+                        songList.add(position + i, songTemp);
+                        songKeys.add(position + i, keyTemp);
+
+                        songList.remove(position);
+                        songKeys.remove(position);
+
+                        i++;
                     }
                 }
                 notifyDataSetChanged();
@@ -119,10 +128,21 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 songList.get(position).setScore(currentScore);
                 holder.tvScore.setText("" + currentScore);
 
-                if (position != songKeys.size()-1) {
-                    int index = identifyPosDownvote(position, position + 1);
-                    if (position != index) {
-                        shiftDownvote(position, index);
+                if (position != 0) {
+                    int i = 0;
+
+                    while (songList.get(position).getScore() < songList.get(position-1).getScore()) {
+                        Song songTemp = songList.get(position);
+                        String keyTemp = songKeys.get(position);
+
+                        songList.add(position - i, songTemp);
+                        songKeys.add(position - i, keyTemp);
+
+                        songList.remove(position + 1);
+                        songKeys.remove(position + 1);
+
+                        i++;
+
                     }
                 }
 
