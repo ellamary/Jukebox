@@ -1,5 +1,7 @@
 package com.ait.android.jukebox.data;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,8 +33,14 @@ public class SongList {
         queue = new ArrayList<Song>();
     }
 
+    public Song get(int position) {
+        Song result = queue.get(position);
+        return result;
+    }
+
     public void addSong(Track track) {
         queue.add(new Song(track));
+        Log.d("tag", "song added");
         sort();
     }
 

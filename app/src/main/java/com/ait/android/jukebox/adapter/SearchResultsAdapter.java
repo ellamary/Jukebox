@@ -110,6 +110,8 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             @Override
             public void onClick(View view) {
                 addSong(item);
+
+
                 //((Activity) mContext).finish();
 
             }
@@ -126,5 +128,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         Song newSong = new Song(track);
 
         FirebaseDatabase.getInstance().getReference().child("posts").child(key).setValue(newSong);
+
+        SongList.getInstance().addSong(newSong.getTrack());
     }
 }

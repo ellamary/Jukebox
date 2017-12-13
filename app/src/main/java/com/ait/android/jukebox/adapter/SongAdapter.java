@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ait.android.jukebox.R;
 import com.ait.android.jukebox.data.Song;
+import com.ait.android.jukebox.data.SongList;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
@@ -34,6 +35,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         songKeys = new ArrayList<String>();
 
         songsRef = FirebaseDatabase.getInstance().getReference();
+
+
+
     }
 
     private DatabaseReference songsRef;
@@ -46,7 +50,8 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final Song song = songList.get(position);
+
+        final Song song = SongList.getInstance().get(position);
 
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
