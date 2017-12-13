@@ -73,8 +73,6 @@ public class MainActivity extends AppCompatActivity implements Search.View {
             //pull from firebase
         }
 
-        //Log.d("token", "my token"+token);
-
         // Setup search field
         final SearchView searchView = (SearchView) findViewById(R.id.search_view);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -148,13 +146,6 @@ public class MainActivity extends AppCompatActivity implements Search.View {
     protected void onDestroy() {
         mActionListener.destroy();
         super.onDestroy();
-    }
-
-    public void addToTempQueue(Track track){
-        tempQueue.add(track);
-        Log.d("title",track.name);
-        Log.d("queue1",tempQueue.get(0).name);
-
     }
 
     public void openQueueActivity(){

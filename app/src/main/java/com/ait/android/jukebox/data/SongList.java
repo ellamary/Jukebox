@@ -31,6 +31,8 @@ public class SongList {
 
     public void init() {
         queue = new ArrayList<Song>();
+
+
     }
     public List<Song> getQueue() {
         return this.queue;
