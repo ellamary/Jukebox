@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ait.android.jukebox.MainActivity;
 import com.ait.android.jukebox.QueueActivity;
@@ -110,7 +111,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             @Override
             public void onClick(View view) {
                 addSong(item);
-
+                Toast.makeText(mContext, "Added!", Toast.LENGTH_LONG).show();
 
                 //((Activity) mContext).finish();
 
