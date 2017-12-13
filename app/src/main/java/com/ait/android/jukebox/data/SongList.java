@@ -80,7 +80,7 @@ public class SongList {
     public void addSong(Song song) {
         queue.add(song);
         Log.d("tag", "song added");
-        sort();
+        //sort();
     }
 
     public void upvoteSong(Song song) {

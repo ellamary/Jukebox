@@ -2,7 +2,6 @@ package com.ait.android.jukebox;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -44,7 +43,6 @@ public class QueueActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
-        Log.d("line", "line 47 in queue activity");
 
         //Toolbar toolbar = (Toolbar) findViewById(R.id.my_toolbar);
         //setSupportActionBar(toolbar);
@@ -55,7 +53,6 @@ public class QueueActivity extends AppCompatActivity {
         adapter = new SongAdapter(this);
 
         recyclerViewItem.setAdapter(adapter);
-        Log.d("line","line 57 in queueactivity");
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setReverseLayout(true);
         layoutManager.setStackFromEnd(true);
@@ -68,21 +65,19 @@ public class QueueActivity extends AppCompatActivity {
 
 
     public void initPostsListener() {
-        Log.d("line","line 71 in queue activity");
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts");
-        Log.d("line","line 73 in queue activity");
 
-        reference.addChildEventListener(new ChildEventListener() {
+        reference.orderByChild("score").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Song song = dataSnapshot.getValue(Song.class);
-//                Log.d("track",song.name);
                 adapter.addPost(song, dataSnapshot.getKey());
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
+                Song song = dataSnapshot.getValue(Song.class);
+                adapter.updatePost(song, dataSnapshot.getKey());
             }
 
             @Override
@@ -100,8 +95,6 @@ public class QueueActivity extends AppCompatActivity {
 
             }
         });
-        Log.d("line","line 103 in queue activity");
-
     }
 
     @Override

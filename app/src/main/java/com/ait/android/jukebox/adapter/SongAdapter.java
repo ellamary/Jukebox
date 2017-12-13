@@ -15,6 +15,7 @@ import com.ait.android.jukebox.data.Song;
 import com.ait.android.jukebox.data.SongList;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -72,7 +73,17 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         holder.btnUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                song.setScore((song.getScore())+1);
+
+                String currKey = songKeys.get(position);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(currKey);
+                DatabaseReference scoreReference = reference.child("score");
+
+                int currentScore = song.getScore();
+                currentScore++;
+                scoreReference.setValue(currentScore);
+
+                holder.tvScore.setText(currentScore);
+                song.setScore(currentScore);
                 notifyDataSetChanged();
             }
         });
@@ -80,10 +91,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         holder.btnDownVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (song.getScore() > 0) {
-                    song.setScore((song.getScore()) - 1);
-                    notifyDataSetChanged();
-                }
+                String currKey = songKeys.get(position);
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(currKey);
+                DatabaseReference scoreReference = reference.child("score");
+
+                int currentScore = song.getScore();
+
+                scoreReference.setValue(currentScore - 1);
+                //song.setScore((song.getScore())+1);
+
+                notifyDataSetChanged();
             }
         });
 
@@ -124,6 +141,10 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         songKeys.add(key);
         songList.add(song);
         notifyDataSetChanged();
+    }
+
+    public void updatePost(Song song, String key) {
+
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
