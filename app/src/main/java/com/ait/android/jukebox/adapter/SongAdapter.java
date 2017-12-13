@@ -53,7 +53,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         Log.d("line","line 55 in song adapter");
-        final Song song = SongList.getInstance().get(position);
+        final Song song = songList.get(position);
 //        Log.d("on bind view holder", song.getTitle());
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
@@ -117,6 +117,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
 //        trackList.add(track);
         Song newSong = new Song(track);
         songList.add(newSong);
+        notifyDataSetChanged();
+    }
+
+    public void addPost(Song song, String key) {
+        songKeys.add(key);
+        songList.add(song);
         notifyDataSetChanged();
     }
 
