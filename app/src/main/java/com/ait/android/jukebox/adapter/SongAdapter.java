@@ -75,7 +75,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         holder.btnUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String currKey = songKeys.get(position);
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(currKey);
                 DatabaseReference scoreReference = reference.child("score");
@@ -83,9 +82,7 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 int currentScore = song.getScore();
                 currentScore++;
                 scoreReference.setValue(currentScore);
-//
-//                holder.tvScore.setText(currentScore);
-//                song.setScore(currentScore);
+
                 songList.get(position).setScore(currentScore);
                 holder.tvScore.setText("" + currentScore);
 
@@ -101,6 +98,11 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 DatabaseReference scoreReference = reference.child("score");
 
                 int currentScore = song.getScore();
+                currentScore--;
+                scoreReference.setValue(currentScore);
+
+                songList.get(position).setScore(currentScore);
+                holder.tvScore.setText("" + currentScore);
 
                 notifyDataSetChanged();
             }
