@@ -1,13 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/openMainActivity"
         android:title="Search"
+        android:icon="@drawable/ic_search"
         android:color = "#ffffff"
         app:showAsAction="ifRoom"/>
-
-
 
 </menu>
