@@ -2,8 +2,6 @@ package com.ait.android.jukebox;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-
 import com.ait.android.jukebox.adapter.SongAdapter;
 import com.ait.android.jukebox.data.Song;
 import com.google.firebase.database.ChildEventListener;
@@ -19,13 +16,9 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-
 import java.util.ArrayList;
 import java.util.List;
-
 import kaaes.spotify.webapi.android.models.Track;
-
 import static com.ait.android.jukebox.MainActivity.token;
 
 public class QueueActivity extends AppCompatActivity implements Preview.View {
@@ -41,7 +34,7 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
 
-        songsToPlay = new ArrayList<Song>();
+        songsToPlay = new ArrayList<>();
 
         mActionListener = new PreviewPresenter(this, this);
         mActionListener.init(token);

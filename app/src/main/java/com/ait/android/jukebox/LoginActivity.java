@@ -59,12 +59,12 @@ public class LoginActivity extends Activity {
 
                 // Auth flow returned an error
                 case ERROR:
-                    logError("Auth error: " + response.getError());
+                    //ogError("Auth error: " + response.getError());
                     break;
 
                 // Most likely auth flow was cancelled
                 default:
-                    logError("Auth result: " + response.getType());
+                    //logError("Auth result: " + response.getType());
             }
         }
     }

@@ -1,13 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
         android:id="@+id/openQueueActivity"
-        android:title="See queue"
-        android:color = "#ffffff"
+        android:title="@string/queue"
+        android:color = "@color/lightGray"
         app:showAsAction="ifRoom"/>
-
-
 
 </menu>
