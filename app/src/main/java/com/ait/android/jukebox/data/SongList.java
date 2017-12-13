@@ -32,6 +32,9 @@ public class SongList {
     public void init() {
         queue = new ArrayList<Song>();
     }
+    public List<Song> getQueue() {
+        return this.queue;
+    }
 
     public Song get(int position) {
         Song result = queue.get(position);
@@ -40,6 +43,7 @@ public class SongList {
 
     public void addSong(Track track) {
         queue.add(new Song(track));
+        Log.d("track name", track.name);
         Log.d("tag", "song added");
         sort();
     }

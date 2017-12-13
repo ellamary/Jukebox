@@ -128,6 +128,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         Song newSong = new Song(track);
 
         FirebaseDatabase.getInstance().getReference().child("posts").child(key).setValue(newSong);
+                Log.d("newSong track",newSong.getTitle());
 
         SongList.getInstance().addSong(newSong.getTrack());
     }

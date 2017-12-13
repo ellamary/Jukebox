@@ -2,6 +2,7 @@ package com.ait.android.jukebox.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
         this.context = context;
         songList = new ArrayList<Song>();
         songKeys = new ArrayList<String>();
-
+        Log.d("line","line 37 in song adapter");
         songsRef = FirebaseDatabase.getInstance().getReference();
-
+        Log.d("line","line 39 in song adapter");
 
 
     }
@@ -45,14 +46,15 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View row = LayoutInflater.from(parent.getContext()).inflate(R.layout.song_row, parent, false);
+        Log.d("line","line 49 in on create view holder");
         return new ViewHolder(row);
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-
+        Log.d("line","line 55 in song adapter");
         final Song song = SongList.getInstance().get(position);
-
+//        Log.d("on bind view holder", song.getTitle());
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
 //        holder.tvScore.setText(Integer.toString(song.getScore()));

@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements Search.View {
         mActionListener = new SearchPresenter(this, this);
         mActionListener.init(token);
 
-        if(songList == null) {
+        if(SongList.getInstance().getQueue() == null) {
+            SongList.getInstance().init();
             //pull from firebase
         }
 
