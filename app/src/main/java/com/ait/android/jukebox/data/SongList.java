@@ -1,6 +1,13 @@
 package com.ait.android.jukebox.data;
 
+import android.provider.ContactsContract;
 import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.DatabaseError;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +21,8 @@ import kaaes.spotify.webapi.android.models.Track;
 public class SongList {
 
     private static SongList songList = null;
+
+    private DatabaseReference songsRef = FirebaseDatabase.getInstance().getReference();
 
     private SongList() {
 
@@ -32,6 +41,24 @@ public class SongList {
     public void init() {
         queue = new ArrayList<Song>();
 
+        songsRef = FirebaseDatabase.getInstance().getReference("posts");
+//        String key = FirebaseDatabase.getInstance().getReference().child("posts").push().getKey();
+//        FirebaseDatabase.getInstance().getReference().child("posts").child(key);
+
+//        songsRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                Song song = dataSnapshot.getValue(Song.class);
+//                SongList.getInstance().addSong(song);
+//                System.out.println(song.getTitle());
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                System.out.println("The read failed: " + databaseError.getCode());
+//            }
+//        });
+
 
     }
     public List<Song> getQueue() {
@@ -48,6 +75,12 @@ public class SongList {
         Log.d("track name", track.name);
         Log.d("tag", "song added");
         //song will be added at score = 0; make sure it is added to the end of the arrayList and we will be ok re: sort
+    }
+
+    public void addSong(Song song) {
+        queue.add(song);
+        Log.d("tag", "song added");
+        sort();
     }
 
     public void upvoteSong(Song song) {

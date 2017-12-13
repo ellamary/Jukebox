@@ -75,9 +75,9 @@ public class QueueActivity extends AppCompatActivity {
         reference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Track track = dataSnapshot.getValue(Track.class);
-                Log.d("track",track.name);
-                adapter.addPost(track, dataSnapshot.getKey());
+                Song song = dataSnapshot.getValue(Song.class);
+//                Log.d("track",song.name);
+                adapter.addPost(song, dataSnapshot.getKey());
             }
 
             @Override
