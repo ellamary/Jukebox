@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -65,11 +66,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
 //        Log.d("on bind view holder", song.getTitle());
         holder.tvTitle.setText(song.getTitle());
         holder.tvArtist.setText(song.getArtist());
-//        holder.tvScore.setText(Integer.toString(song.getScore()));
+//        holder.tvScore.setText(Integer.toString(song. getScore()));
 //        Image image = song.getImage();
 //        if (image != null) {
 //            Picasso.with(context).load(image.url).into(holder.ivCoverart);
 //        }
+        holder.tvScore.setText("" + song.getScore());
+
         holder.btnVeto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +83,6 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         holder.btnUpVote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String currKey = songKeys.get(position);
                 DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(currKey);
                 DatabaseReference scoreReference = reference.child("score");
@@ -89,8 +91,16 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 currentScore++;
                 scoreReference.setValue(currentScore);
 
-                holder.tvScore.setText(currentScore);
-                song.setScore(currentScore);
+                songList.get(position).setScore(currentScore);
+                holder.tvScore.setText("" + currentScore);
+
+                if (position != 0) {
+                    int index = identifyPosUpvote(position, position - 1);
+
+                    if (position != index) {
+                        shiftUpvote(position, index);
+                    }
+                }
                 notifyDataSetChanged();
             }
         });
@@ -103,9 +113,18 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
                 DatabaseReference scoreReference = reference.child("score");
 
                 int currentScore = song.getScore();
+                currentScore--;
+                scoreReference.setValue(currentScore);
 
-                scoreReference.setValue(currentScore - 1);
-                //song.setScore((song.getScore())+1);
+                songList.get(position).setScore(currentScore);
+                holder.tvScore.setText("" + currentScore);
+
+                if (position != songKeys.size()-1) {
+                    int index = identifyPosDownvote(position, position + 1);
+                    if (position != index) {
+                        shiftDownvote(position, index);
+                    }
+                }
 
                 notifyDataSetChanged();
             }
@@ -152,7 +171,58 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
     }
 
     public void updatePost(Song song, String key) {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("posts").child(key);
+        DatabaseReference scoreReference = reference.child("score");
+    }
 
+    public int identifyPosUpvote(int currentIndex, int compareIndex) {
+        Song currentSong = songList.get(currentIndex);
+        Song aboveSong = songList.get(compareIndex);
+        if (currentSong.getScore() < aboveSong.getScore()) {
+            return compareIndex - 1;
+        }
+        else {
+            return identifyPosUpvote(currentIndex, compareIndex - 1);
+        }
+    }
+
+    public void shiftUpvote(int oldIndex, int newIndex) {
+
+        Song tempSong = songList.get(oldIndex);
+        String tempKey = songKeys.get(oldIndex);
+
+        for (int i = oldIndex; i > newIndex; i--) {
+            songList.add(i, songList.get(i-1));
+            songKeys.add(i, songKeys.get(i-1));
+        }
+
+        songList.add(newIndex, tempSong);
+        songKeys.add(newIndex, tempKey);
+    }
+
+    public int identifyPosDownvote(int currentIndex, int compareIndex) {
+        Song currentSong = songList.get(currentIndex);
+        Song aboveSong = songList.get(compareIndex);
+        if (currentSong.getScore() < aboveSong.getScore()) {
+            return compareIndex + 1;
+        }
+        else {
+            return identifyPosUpvote(currentIndex, compareIndex + 1);
+        }
+    }
+
+    public void shiftDownvote(int oldIndex, int newIndex) {
+
+        Song tempSong = songList.get(oldIndex);
+        String tempKey = songKeys.get(oldIndex);
+
+        for (int i = oldIndex; i > newIndex; i++) {
+            songList.add(i, songList.get(i+1));
+            songKeys.add(i, songKeys.get(i+1));
+        }
+
+        songList.add(newIndex, tempSong);
+        songKeys.add(newIndex, tempKey);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -160,9 +230,9 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder> {
         public TextView tvTitle;
         public TextView tvArtist;
         public TextView tvScore;
-        public Button btnVeto;
-        public Button btnUpVote;
-        public Button btnDownVote;
+        public ImageButton btnVeto;
+        public ImageButton btnUpVote;
+        public ImageButton btnDownVote;
 
         public ViewHolder(View itemView) {
             super(itemView);

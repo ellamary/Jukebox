@@ -101,6 +101,7 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.d("OnChildChanged", "OnChildChanged");
                 Song song = dataSnapshot.getValue(Song.class);
                 adapter.updatePost(song, dataSnapshot.getKey());
             }
@@ -146,6 +147,34 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
                 adapter.addPost(track, key);
             }
         }
+    }
+
+    public void openMainActivity(){
+        Intent intent = new Intent(QueueActivity.this, MainActivity.class);
+//        this.setResult(RESULT_OK,intent);
+//        this.startActivityForResult(intent, REQUEST_CODE_QUEUE);
+        startActivity(intent);
+        finish();
+
+//                ((Activity) mContext).setResult(RESULT_OK,intent);
+//                ((Activity) mContext).startActivityForResult(intent, REQUEST_CODE_ADD_TRACK);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_queue, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.openMainActivity:
+                openMainActivity();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     //TODO I commented this out because it said "method does not override method from its superclass"

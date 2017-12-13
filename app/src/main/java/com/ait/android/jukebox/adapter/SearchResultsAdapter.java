@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ait.android.jukebox.MainActivity;
 import com.ait.android.jukebox.QueueActivity;
@@ -46,14 +48,14 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
         public final TextView title;
         public final TextView subtitle;
         public final ImageView image;
-        public final Button btnAdd;
+        public final ImageButton btnAdd;
 
         public ViewHolder(View itemView) {
             super(itemView);
             title = (TextView) itemView.findViewById(R.id.entity_title);
             subtitle = (TextView) itemView.findViewById(R.id.entity_subtitle);
             image = (ImageView) itemView.findViewById(R.id.entity_image);
-            btnAdd = (Button) itemView.findViewById(R.id.btn_add);
+            btnAdd = (ImageButton) itemView.findViewById(R.id.btn_add);
             itemView.setOnClickListener(this);
         }
 
@@ -110,7 +112,7 @@ public class SearchResultsAdapter extends RecyclerView.Adapter<SearchResultsAdap
             @Override
             public void onClick(View view) {
                 addSong(item);
-
+                Toast.makeText(mContext, "Added!", Toast.LENGTH_LONG).show();
 
                 //((Activity) mContext).finish();
 
