@@ -86,9 +86,13 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 songList.get(position).setScore(currentScore);
                 holder.tvScore.setText("" + currentScore);
 
-                int index = identifyPosUpvote(position, position-1);
-                shiftUpvote(position, index);
+                if (position != 0) {
+                    int index = identifyPosUpvote(position, position - 1);
 
+                    if (position != index) {
+                        shiftUpvote(position, index);
+                    }
+                }
                 notifyDataSetChanged();
             }
         });
@@ -107,8 +111,12 @@ public class SongAdapter extends RecyclerView.Adapter<SongAdapter.ViewHolder>{
                 songList.get(position).setScore(currentScore);
                 holder.tvScore.setText("" + currentScore);
 
-                int index = identifyPosDownvote(position, position+1);
-                shiftDownvote(position, index);
+                if (position != songKeys.size()-1) {
+                    int index = identifyPosDownvote(position, position + 1);
+                    if (position != index) {
+                        shiftDownvote(position, index);
+                    }
+                }
 
                 notifyDataSetChanged();
             }
