@@ -19,6 +19,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.List;
 import kaaes.spotify.webapi.android.models.Track;
+
 import static com.ait.android.jukebox.MainActivity.token;
 
 public class QueueActivity extends AppCompatActivity implements Preview.View {
@@ -27,12 +28,15 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
     private Preview.ActionListener mActionListener;
     public static List<Song> songsToPlay;
     public SongAdapter adapter;
+    public static String token;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_queue);
+
+        token = getIntent().getStringExtra(MainActivity.EXTRA_TOKEN);
 
         songsToPlay = new ArrayList<>();
 
@@ -114,6 +118,7 @@ public class QueueActivity extends AppCompatActivity implements Preview.View {
 
     public void openMainActivity(){
         Intent intent = new Intent(QueueActivity.this, MainActivity.class);
+        intent.putExtra(MainActivity.EXTRA_TOKEN, token);
         startActivity(intent);
         finish();
     }

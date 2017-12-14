@@ -10,11 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.SearchView;
-
 import com.ait.android.jukebox.adapter.SearchResultsAdapter;
-
 import java.util.List;
-
 import kaaes.spotify.webapi.android.models.Track;
 
 public class MainActivity extends AppCompatActivity implements Search.View {
@@ -134,6 +131,7 @@ public class MainActivity extends AppCompatActivity implements Search.View {
 
     public void openQueueActivity(){
         Intent intent = new Intent(MainActivity.this, QueueActivity.class);
+        intent.putExtra(EXTRA_TOKEN, token);
         startActivity(intent);
         finish();
     }
